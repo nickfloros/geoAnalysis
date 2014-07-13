@@ -60,7 +60,7 @@ async.eachSeries(data,
 	function(err) {
 		if (err) throw err;
 		for (var i=0; i<data.length; i++) {
-			console.log(data[i].revGeocode.results[0].formated_address);
+			console.log(data[i].revGeocode.results[0].formatted_address);
 		}
 	}
 );
