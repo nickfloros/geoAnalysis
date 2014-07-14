@@ -4,7 +4,8 @@
 var http=require('http');
 var async=require('async');
 var monogdb=require('mongodb').MongoDbClient;
-
+var ReverseGeocode = require('./ReverseGeocode.js');
+/*
 var ReverseGeocode =function() {
 
 };
@@ -39,7 +40,7 @@ ReverseGeocode.prototype.process=function(pos,cb){
 	  	cb(err);
 	});
 };
-
+*/
 /*revGeocode({lat:53.9880985,lng:-1.044328809},function(err,data) {
 	// first entry contains the address ...
 	var address = {components}
