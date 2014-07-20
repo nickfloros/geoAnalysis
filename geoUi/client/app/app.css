@@ -1,0 +1,61 @@
+
+/*
+A custom Bootstrap 3.1 theme from http://bootply.com\
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+*/
+
+/*
+A custom Bootstrap 3.1 theme from http://bootply.com\
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+*/
+html,body{
+    height:100%;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: (33.333%-0); 
+    height: (100%-0);
+}
+
+body{
+    padding-top:50px; /*padding for navbar*/
+}
+
+
+#main, #main>.row {
+    height:100%;
+}
+
+#left {
+    height:100%;
+    overflow-y:scroll;
+}
+
+/* fix for Twitter Bootstrap handling of responsive images */
+.angular-google-map img {
+    max-width: inherit;
+}
+
+.angular-google-map-container {
+    
+	display: block;
+    
+    width:66.6666%;
+    height:(100%-0);
+    position:absolute;
+    right:0px;
+    top:50px;
+    bottom:0;
+    overflow:hidden;
+}
