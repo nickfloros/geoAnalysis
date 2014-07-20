@@ -3,9 +3,7 @@
  */
 var http=require('http');
 var async=require('async');
-var monogdb=require('mongodb').MongoDbClient;
-var ReverseGeocode = require('./ReverseGeocode.js');
-/*
+
 var ReverseGeocode =function() {
 
 };
@@ -18,7 +16,7 @@ ReverseGeocode.prototype.process=function(pos,cb){
 	var options = {
 	  	host: 'maps.googleapis.com',
 	  	port: 80,
-	  	path: '/maps/api/geocode/json?latlng='+pos.lat+','+pos.lng//53.9880985,-1.044328809'
+	  	path: '/maps/api/geocode/json?latlng='+pos.lat+','+pos.lng
 		};
 		console.log(options);
 	http.get(options, function(res) {
@@ -40,28 +38,5 @@ ReverseGeocode.prototype.process=function(pos,cb){
 	  	cb(err);
 	});
 };
-*/
-/*revGeocode({lat:53.9880985,lng:-1.044328809},function(err,data) {
-	// first entry contains the address ...
-	var address = {components}
-});
-*/
 
-var data=[];
-for (var i=0; i<2; i++) {
-	data.push({lat:53.9880985,lng:-1.044328809});
-}
-
-// bulk process data 
-async.eachSeries(data,
-	function( point, callback){
-		var svc  = new ReverseGeocode();
-		svc.process(point,callback);
-	},
-	function(err) {
-		if (err) throw err;
-		for (var i=0; i<data.length; i++) {
-			console.log(data[i].revGeocode.results[0].formatted_address);
-		}
-	}
-);
+module.exports=ReverseGeocode;
