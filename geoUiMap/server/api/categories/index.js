@@ -5,6 +5,6 @@ var controller = require('./categories.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.get('/', controller.all);
 
 module.exports = router;

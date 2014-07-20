@@ -16,6 +16,7 @@ module.exports = function(app) {
   });
 
   // Insert routes below
+  app.use('/api/trips', require('./api/trip'));
   app.use('/api/things', require('./api/thing'));
   
   app.use('/api/categories',function(req,res) {
@@ -23,7 +24,7 @@ module.exports = function(app) {
       res.json(dataSet);
     });
   });
-
+/*
   app.use('/api/trips', function(req,res) {
     dataBase.collection('trace_poi').
       find({},{trip_id:1,weekday:1,timeStart:1,odmDistace:1},function(err, cursor) {
@@ -41,7 +42,7 @@ module.exports = function(app) {
       res.json(dataSet);
     });
   });
-
+*/
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);

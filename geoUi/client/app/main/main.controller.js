@@ -23,19 +23,20 @@ angular.module('geoUiApp')
       draggable: true
  		};
     $scope.trips = [];
-       $scope.myData = [{name: "Moroni", age_id: 50},
+    $scope.myData = [];/*{name: "Moroni", age_id: 50},
                       {name: "Tiancum", age_id: 43},
                       {name: "Jacob", age_id: 27},
                       {name: "Nephi", age_id: 29},
                       {name: "Enos", age_id: 34}];
+*/
+    $scope.gridOptions = { data: 'myData' ,
+      columnDefs: [{ field: 'trip_id', displayName: 'trip', sortable: false, width:'auto' }]
+    };
 
-    $scope.gridOptions = { data: 'myData' };
+    $http({url:'/api/trips',method:'GET'})
+      .success(function(data) {
+           console.log(data);
+           $scope.myData.push({trip_id:'1'});//data;
+      });                           
 
-    $http.get('/api/things').success(function(resp) {
-      console.log(resp);
-      $scope.awesomeThings = resp;
-    });
-    $http.get('/api/trips').success(function(resp) {
-
-    });
   });

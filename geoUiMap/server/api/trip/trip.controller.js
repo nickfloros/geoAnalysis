@@ -5,10 +5,21 @@ var trip = require('../../repository/tripsRepository');
 
 var collection;
 
-exports.index=function(req,res) {
-	trip.get(function(err,data){
-		res.json(data);
+exports.getAll=function(req,res) {
+	var resp = res;
+	trip.getAll(function(err,data){
+		resp.setHeader('Content-Type', 'application/json');
+		resp.end(JSON.stringify(data));
 	});
+};
+
+exports.getTrip=function(req,res) {
+	var resp = res;
+	console.log(req.params.id);
+	trip.getTrip(Math.round(req.params.id),function(err,data){
+		resp.setHeader('Content-Type', 'application/json');
+		resp.end(JSON.stringify(data));
+	});	
 };
 
 
