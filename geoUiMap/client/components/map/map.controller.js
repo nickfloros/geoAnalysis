@@ -9,17 +9,20 @@ angular.module('geoUiMapApp')
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+    $scope.markerCluster={};
+    $scope.$on('SHOW_TRIP',function(event,trips){
 
-    $scope.$on('SHOW_TRIP',function(event,trip){
+      for (var i=0; i<trips.length; i++) 
+        if (trips[i].waypoints.length>2) {    
+      var trip = trips[i];	
 
-    	
     	var startLatLng = 
     		new google.maps.LatLng(trip.start.loc.coordinates[0],
     						trip.start.loc.coordinates[1]);
     $scope.tripMarkers.push(new google.maps.Marker({
     		map: $scope.myMap,
     	position: startLatLng,
-    	title:'start'
+    	title:trip.trip_id.toString()+'start'
   		}));
     	var endLatLng = 
     		new google.maps.LatLng(trip.end.loc.coordinates[0],
@@ -27,7 +30,7 @@ angular.module('geoUiMapApp')
     $scope.tripMarkers.push(new google.maps.Marker({
     		map: $scope.myMap,
     	position: endLatLng,
-    	title:'end'
+    	title:trip.trip_id.toString()+'end'
   		}));
       $scope.mapOptions.center=startLatLng;
       for (var i=1; i<trip.waypoints.length-1; i++) {
@@ -37,9 +40,10 @@ angular.module('geoUiMapApp')
     $scope.tripMarkers.push(new google.maps.Marker({
         map: $scope.myMap,
       position: point,
-      title:i.toString()
+      title:trip.trip_id.toString()+'_'i.toString()
       }));
 
+      }
       }
     })
   });

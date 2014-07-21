@@ -19,7 +19,8 @@
     "socket.io": "~0.9.16",
     "socketio-jwt": "^2.0.2",
     "mongodb":"",
-    "async":""
+    "async":"",
+    "underscore":""
   },
   "devDependencies": {
     "grunt": "~0.4.4",

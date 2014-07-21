@@ -16,8 +16,9 @@ module.exports = function(app) {
   console.log(config.mongo.uri);
   // Insert routes below
 
- app.use('/api/categories', require('./api/categories'));
+  app.use('/api/categories', require('./api/categories'));
   app.use('/api/trips',require('./api/trip'));
+  app.use('/api/pois',require('./api/pois'));
   app.use('/api/things', require('./api/thing'));
 /*
   app.get('/api/trips',function(req, res) {

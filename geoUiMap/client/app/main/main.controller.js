@@ -7,24 +7,33 @@ angular.module('geoUiMapApp')
     $scope.tripsCounter = 0;
     $scope.currentTrip={};
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      console.log(awesomeThings.length);
-      $scope.awesomeThings = awesomeThings;
-    });
-
-    $http.get('/api/categories').success(function(categories){
-      console.log(categories.length);
-    	$scope.categoryCounter=categories.length;
+    $http.get('/api/categories/all').success(function(categories){
+      console.log(categories.success)
+      console.log(categories.data.length);
+    	$scope.categoryCounter=categories.data.length;
     })
 
-    $http.get('/api/trips').success(function(trips){
-      console.log(trips.length);
-      $scope.tripsCounter=trips.length;
+    $http.get('/api/trips/all').success(function(trips){
+      console.log(trips.success);
+      console.log(trips.data.length);
+      $scope.tripsCounter=trips.data.length;
     })
 
     $http.get('/api/trips/1').success(function(trip){
-      console.log(trip.length);
-      $scope.currentTrip=trip[0];
-      $scope.$broadcast('SHOW_TRIP',trip[0]);
-    })
+      console.log(trip.data.length);
+      $scope.currentTrip=trip;
+      setTimeout(function() {
+      $scope.$broadcast('SHOW_TRIP',trip.data);        
+        },2000);
+    });
+
+    $http.get('/api/trips/2').success(function(trip){
+      console.log(trip.data.length);
+      $scope.currentTrip=trip;
+      setTimeout(function() {
+      $scope.$broadcast('SHOW_TRIP',trip.data);        
+        },2000);
+    });
+
+
   });

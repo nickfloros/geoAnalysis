@@ -39,6 +39,10 @@
 		return _trips;
 	};
 
+	dbClient.pois = function() {
+		return _pois;
+	};
+	
 	dbClient.categories=function() {
 		return _aaCategories;
 	};
