@@ -44,14 +44,16 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
+    
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
     <!-- build:js(client) app/vendor.js -->
       <!-- bower:js -->
+
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/json3/lib/json3.js"></script>
@@ -63,6 +65,8 @@
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/ng-grid/build/ng-grid.js"></script>
       <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+      <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.js"></script>
+
       <!-- endbower -->
     <!-- endbuild -->
 
@@ -75,8 +79,10 @@
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
-      <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.js"></script>
-      
+        <script src="app/scripts/services/trip.js"></script>
+
+           <script src="components/map/map.controller.js"></script>
+           <script src="components/map/markerCluster.js"></script>
 
 </body>
 </html>

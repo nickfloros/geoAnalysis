@@ -17,5 +17,6 @@ angular.module('geoUiMapApp', [
   });
 
 function onGoogleReady() {
- // angular.bootstrap(document.getElementById("map"), ['app.geoUiMapApp']);
+  console.log('google map api initialised');
+  angular.bootstrap(document.getElementById("map"), ['geoUiMapApp']);
 };

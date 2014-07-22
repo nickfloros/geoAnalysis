@@ -28,3 +28,9 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+.scrollable-menu {
+    height: auto;
+    max-height: 500px;
+    overflow-x: hidden;
+}
