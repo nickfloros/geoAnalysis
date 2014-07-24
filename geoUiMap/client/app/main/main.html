@@ -1,5 +1,14 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div ng-include="'components/map/map.html'"></div>
+
+<tabset justified="true">
+  <tab heading="Map">
+  	<div ng-include="'components/map/map.html'"></div>
+	</tab>
+	<tab heading="Graphs">
+		<div ng-include="'components/graph/graph.html'"></div>
+	</tab>
+    <tab heading="Long Justified">Long Labeled Justified content</tab>
+</tabset>
 
 <footer class="footer">
   <div class="container">

@@ -11,6 +11,7 @@
 	var _trips;
 	var _aaCategories;
 	var _pois;
+	var _graph;
 
 	async.series([
 		function(cb) {
@@ -20,6 +21,7 @@
 			  console.log('trips ' + _trips===null);
 			  _aaCategories=db.collection('aa_categories')
 			  _pois = db.collection("pois");
+			  _graph = db.collection('graph');
 			  console.log('done');
 			  cb();
 			});
@@ -46,5 +48,9 @@
 	dbClient.categories=function() {
 		return _aaCategories;
 	};
+
+	dbClient.graph = function() {
+		return _graph;
+	}
 })(module.exports);
 

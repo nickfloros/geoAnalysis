@@ -20,6 +20,7 @@ module.exports = function(app) {
   app.use('/api/trips',require('./api/trip'));
   app.use('/api/pois',require('./api/pois'));
   app.use('/api/things', require('./api/thing'));
+  app.use('/api/graph',require('./api/graph'));
 /*
   app.get('/api/trips',function(req, res) {
     var resp = res;

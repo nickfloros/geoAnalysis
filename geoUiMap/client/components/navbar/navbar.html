@@ -1,5 +1,5 @@
-
-<nav ng-controller="NavbarCtrl" id="navbar" class="navbar navbar-inverse navbar-static" role="navigation">      
+<div ng-controller="NavbarCtrl">
+<nav id="navbar" class="navbar navbar-inverse navbar-static" role="navigation">      
     
       <div class="container-fluid">
         <div class="navbar-header">
@@ -16,7 +16,7 @@
             <li class="dropdown">
               <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Map <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                  <li class="dropdown-toggle" ng-repeat="m in mapCmds" role="presentation"><a ng-click="go(m.id)" role="menuitem" tabindex="-1">{{m.title}}</a></li>
+                  <li class="dropdown-toggle" ng-repeat="m in mapCmds" role="presentation"><a ng-click="mapCtrl(m.id)" role="menuitem" tabindex="-1">{{m.title}}</a></li>
               </ul>
             </li>
           </ul>
@@ -43,3 +43,4 @@
         </div>
       </div>
     </nav>
+

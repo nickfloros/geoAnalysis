@@ -1,0 +1,40 @@
+<!--<div ng-controller="MapOptionsCtrl">
+  <div class='modal-header'>
+      <h3 class='modal-title'>I am a modal!</h3>
+  </div>
+  <div class="modal-body">
+      <ul>
+          <li ng-repeat="item in items">
+              <a ng-click="selected.item = item">{{ item }}</a>
+          </li>
+      </ul>
+      Selected: <b>{{ selected.item }}</b>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="ok()">OK</button>
+  </div>
+</div>
+-->
+<div>
+
+        <div class="modal-header">
+            <h3>Mapping options</h3>
+        </div>
+        <div class="modal-body">
+          <button class="btn btn-info btn-sm" ng-click="plotPois()">Plot Pois</button>
+<!--          <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+          <div class="form-horizontal">
+            <div class="input-group">
+              <input type="text" class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="dt" is-open="opened" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+              <button style="height:34px;" class="btn btn-default" ng-click="open()">
+              <i class="icon-calendar"></i></button> <b><- button not working</b>
+              </span>
+            </div>
+          </div>-->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+</div>

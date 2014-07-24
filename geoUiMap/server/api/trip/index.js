@@ -8,5 +8,7 @@ var router = express.Router();
 router.get('/all', controller.getAll);
 router.get('/:id',controller.getTrip);
 router.get('/weekday/:weekday',controller.getWeeklyTrips);
-router.get('/weekday/visits/:weekday',controller.visits);
+router.get('/startEnd',controller.getStartEnds);
+router.get('/startEnd/:weekday',controller.getStartEnds);
+router.get('/pois/:id',controller.getTripPois);
 module.exports = router;

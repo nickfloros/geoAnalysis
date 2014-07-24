@@ -32,8 +32,6 @@ exports.getId=function(req,res) {
 exports.getList=function(req,res) {
 	var poiList = [];
 	var split=req.params.poiList.split(',');
-	console.log(split);
-	console.log(req.params.poiList);
 	for (var i=0; i<split.length; i++) 
 		poiList.push(parseInt(split[i]));
 	poi.getList(poiList,function(err,data) {

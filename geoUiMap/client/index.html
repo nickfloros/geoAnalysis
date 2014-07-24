@@ -48,8 +48,15 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <!-- add d3 dependancies -->
+    <script src="bower_components/d3/d3.js"></script>
+
+    <script src="app/scripts/d3.dependencyWheel.js"></script>
+    <script src="app/scripts/CodeFlower.js"></script>
+
+    <!-- add maps -->
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
     <!-- build:js(client) app/vendor.js -->
       <!-- bower:js -->
@@ -82,7 +89,9 @@
         <script src="app/scripts/services/trip.js"></script>
 
            <script src="components/map/map.controller.js"></script>
-           <script src="components/map/markerCluster.js"></script>
+           <script src="components/graph/graph.controller.js"></script>
+           <script src="components/map/markercluster.js"></script>
+           <script src="components/map/map.option.controller.js"></script>
 
 </body>
 </html>
