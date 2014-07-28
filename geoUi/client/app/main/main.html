@@ -1,14 +1,18 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<google-map center="map.center" draggable="true" zoom="map.zoom"></google-map>
+<google-map center="map.center" draggable="true" events="map.events" zoom="map.zoom">
+<markers models="map.addressMarkers" coords="'self'" icon="'icon'">
+</markers>
+<markers models="map.destinationMarker" coords="'self'" icon="'icon'"></markers>
+</google-map>
 
 <div class="container-fluid" id="main">
   <div class="row" style="height=100%">
     <div class="col-xs-4" id="left">
     
-      <h2>Bootstrap Google Maps Demo</h2>
+      {{destinationAddress}}
       
-      <div class="gridStyle" ng-grid="gridOptions">
+      <div class="gridStyle" ng-grid="gridOptions" style="height: auto;overflow-y:hidden">
         </div>
 
     </div>
