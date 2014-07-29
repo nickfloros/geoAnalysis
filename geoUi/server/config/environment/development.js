@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://127.0.0.1:27017/poiDb'
+    uri: 'mongodb://192.168.1.65:27017/poiDb'
   },
   nokia : {
        nokiaAppId: 'mUAJf3jcUyXXkAQqvSzD',

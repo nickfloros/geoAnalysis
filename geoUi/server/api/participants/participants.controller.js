@@ -12,18 +12,27 @@ exports.getArea = function(req, res) {
 	var area = req.params.area;
 	console.log(area);
 	repository.getArea(req.params.area,function(err, dataSet) {
-
-		async.eachSeries( 
-			dataSet,
-			nokiaFactory.geocode,
-			function(err) {
-				var payload = {
-					success:true,
-					data : dataSet
-				};
-				res.json(payload);
-			}
-		);
+		if (dataSet[0].pos===undefined) {
+			async.eachSeries( 
+				dataSet,
+				nokiaFactory.geocode,
+				function(err) {
+					var payload = {
+						success:true,
+						data : dataSet
+					};
+					repository.setLocation(dataSet);
+					res.json(payload);
+				}
+			);
+		}
+		else{
+			var payload = {
+				success:true,
+				data : dataSet
+			};
+			res.json(payload);
+		}
 	});
 };
 
