@@ -3,11 +3,12 @@
 	var map;
 	var $=jQuery;
 	var markers=[];
+	var markerCluster = null;
+	var useMarkCluster=false;
 
 	var createMarker = function(point) {
 		var marker = new google.maps.Marker({
 	    position: new google.maps.LatLng(point.pos.lat,point.pos.lng),
-	    map: map,
 	    title:point.postcode
 	  });
 	  markers.push(marker);
@@ -19,18 +20,44 @@
 		}
 	}
 
+	var mapBounds = null;
+
 	var getData = function(id) {
-		$.get('/api/participants/in/'+id,function(dataSet){
-			clearMarkers();
-			markers.length=0;
+		clearMarkers();
+		markers.length=0;
+		mapBounds = new google.maps.LatLngBounds();
+		if (markerCluster!==null) 
+			markerCluster.clearMarkers();
+		$(window).trigger('getData',{id:id,page:0});
+	};
+
+	$(window).on('getData',function(event,plotReq) {
+		$.get('/api/participants/in/'+plotReq.id+'/'+plotReq.page,function(dataSet){
 			var bounds = new google.maps.LatLngBounds();
 			for (var i=0; i<dataSet.data.length; i++) {
 				createMarker(dataSet.data[i]);
-				bounds.extend(new google.maps.LatLng(dataSet.data[i].pos.lat,dataSet.data[i].pos.lng));
+				mapBounds.extend(new google.maps.LatLng(dataSet.data[i].pos.lat,dataSet.data[i].pos.lng));
 			};
-			map.fitBounds(bounds);
+			if (dataSet.page===-1) {
+				map.fitBounds(mapBounds);
+				if (useMarkCluster) {
+					if (markerCluster===null) 
+						markerCluster = new MarkerClusterer(map,markers);
+					else 
+						markerCluster.addMarkers(markers);
+				}
+				else {
+					for(var i=0; i<markers.length;i++)
+						markers[i].setMap(map);
+				}
+			}
+			else{
+				$(window).trigger('getData',{id:plotReq.id,page:plotReq.page+1});
+			}
 		});
-	};
+
+	});
+
 
 	var loadScript = function(){
 	  var script = document.createElement('script');
@@ -60,8 +87,27 @@
   	getData('reading');
   });
 
+  $('#all').on('click', function(e) {
+  	getData('master');
+  });
+
 	$.get('/api/trips',function(data){
 		console.log(data);
+	});
+
+	$('#useMarkCluster').on('click',function(e) {
+		useMarkCluster = useMarkCluster===false?true:false;
+		if (markers.length>0) {
+			if (useMarkCluster) {
+				if (markerCluster===null) markerCluster=new MarkerClusterer(map,markers);
+				else	markerCluster.addMarkers(markers);
+			}
+			else {
+				markerCluster.clearMarkers();
+				for (var i=0;i<markers.length;i++)
+					markers[i].setMap(map);
+			}
+		}
 	});
 
 	window.onload = loadScript;

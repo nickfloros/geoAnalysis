@@ -63,6 +63,16 @@ exports.distance=function(req,resp) {
 	
 };
 
+var createSet = function(destination) {
+	var set = {	origins:[],
+			destination:req.params.destination,
+			distances : [],
+			destination_address:''
+		};
+	return set;
+};
+
+
 exports.computeDistance=function(req,resp) {
 	console.log(req.params.area);
 	console.log(req.params.destination);
@@ -75,39 +85,23 @@ exports.computeDistance=function(req,resp) {
 			}
 		};
 		var sets = [];
-		var partialSet=[];
-		var partialSetCounter=0;
+
+		// split set in n parts each part is posted
+		var currentSet = createSet(req.params.destination);
+		sets.push(currentSet);
+		// create sets of x route computation requests
 		for (var i=0; i<dataSet.length; i++) {
-			if (partialSetCounter<50) {
-				partialSet.push(dataSet[i]);
-				partialSetCounter++;
-			}
-			else {
-				sets.push(
-					{
-						origins:partialSet,
-						destination:req.params.destination,
-						distances : [],
-						destination_address:''
-					}
-				);
-				partialSet=[]; // strart a new set;
+			currentSet.options.push(dataSet[i]);
+			if (currentSet.length>50) {
+				currentSet=createSet(req.params.destination);
+				sets.push(currentSet);
 			}
 		}
-		if (partialSet.length>0)
-			sets.push(
-					{
-						origins:partialSet,
-						destination:req.params.destination,
-						distances : [],
-						destination_address:''
-					});
 
+		// i might be able to run this in parallel 
 		async.eachSeries(sets, 
 			googleFactory.computeDistance,
 		function(err){
-			console.log(sets.length);
-			console.log(sets[0].destination_address);
 			payload.data.destination_address = sets[0].destination_address;
 			for (var k=0; k<sets.length; k++) {
 				console.log(sets[k].distances.length);
@@ -116,7 +110,7 @@ exports.computeDistance=function(req,resp) {
 				}
 			}
 			resp.json(payload);			
-		})
+		});
 
 	});
 };

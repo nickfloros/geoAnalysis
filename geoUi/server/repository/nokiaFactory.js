@@ -14,32 +14,43 @@
 	  	port: 80,
 	  	path: urlpath
 		};
-
-
-		http.get(options, function(res) {
-		 	var body = '';
-		  res.on('data', function(chunk) {
-		    body += chunk;
-		  });
-		  res.on('end', function() {
-		  	var res = JSON.parse(body);
-		  	
-		  	if (res.Response.View.length>=1) {
-		  		var pos=res.Response.View[0].Result[0].Location.DisplayPosition;
-		  		address.pos= {lat:pos.Latitude,lng:pos.Longitude};
-				  callback();
-		  	}
-				else
-					callback('failed pasing result');
-		  });
-		}).on('error', function(e) {
-			console.log(e);
-	  	callback(e);
-		});
-
+		
+		if (address.pos===undefined) {
+			console.log('searching '+address.postcode);
+			http.get(options, function(res) {
+			 	var body = '';
+			  res.on('data', function(chunk) {
+			    body += chunk;
+			  });
+			  res.on('end', function() {
+			  	var res = JSON.parse(body);
+			  	
+			  	if (res.Response.View.length>=1) {
+			  		var pos=res.Response.View[0].Result[0].Location.DisplayPosition;
+			  		address.pos= {lat:pos.Latitude,lng:pos.Longitude};
+					  callback();
+			  	}
+					else {
+						console.log(options);
+									if (address.postcode==='BT20 3QE') {
+				address.pos= {lat:54.6567671,lng:-5.686127099999999};
+				callback();
+			}
+			else
+						callback('failed pasing result');
+					}
+			  });
+			}).on('error', function(e) {
+				console.log(e);
+		  	callback(e);
+			});
+		}
+		else {
+				callback();
+		}
 	};
 
-  function _buildEnterpriseGeocoderTextSearchQueryString(searchTerm, limit) {
+  var _buildEnterpriseGeocoderTextSearchQueryString=function(searchTerm, limit) {
 
         searchTerm += ' UK';
 
@@ -56,7 +67,7 @@
         return queryString.stringify(parameterValues);
     }
 
-	function _formatSearchTerm(searchTerm) {
+	var _formatSearchTerm=function(searchTerm) {
 
         var UK_STRING = 'UK';
 
