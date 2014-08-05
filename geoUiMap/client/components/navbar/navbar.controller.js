@@ -38,7 +38,6 @@ angular.module('geoUiMapApp')
     };
 
     $scope.dayCmd=function(id){
-      alert($scope.days[id-1].title);
       $scope.selectedDays=id;
       $rootScope.$broadcast('get.weekdata',$scope.days[id-1].title);
     };
