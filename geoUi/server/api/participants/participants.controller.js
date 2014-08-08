@@ -8,6 +8,8 @@ var http = require('http');
 var repository = require('../../repository/participantsRepository.js')
 var nokiaFactory = require('../../repository/nokiaFactory.js');
 
+
+
 exports.getArea = function(req, res) {
 	var area = req.params.area;
 	var page = req.params.page===undefined?0:Math.round(parseInt(req.params.page));
@@ -60,7 +62,9 @@ exports.getAreas = function(req, res) {
 		data : [
 				{text:'london',id:'london'},
 				{text:'reading',id:'reading'},
-				{text:'north',id:'liverpool_manchester'}]
+				{text:'north',id:'liverpool_manchester'},
+				{text:'birmingham',id:'birmingham'},
+				{text:'all',id:'master'}]
 	};
 
 	res.json(payload);

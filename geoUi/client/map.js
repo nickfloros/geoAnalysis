@@ -7,11 +7,20 @@
 	var useMarkCluster=false;
 
 	var createMarker = function(point) {
+try {
+		if (point.pos!=null && !isNaN(point.pos.lat)){
 		var marker = new google.maps.Marker({
 	    position: new google.maps.LatLng(point.pos.lat,point.pos.lng),
 	    title:point.postcode
 	  });
 	  markers.push(marker);
+	  return true
+	}
+}
+catch (e) {
+//	console.log(point);
+}
+return false;
 	};
 
 	var clearMarkers = function() {
@@ -35,8 +44,11 @@
 		$.get('/api/participants/in/'+plotReq.id+'/'+plotReq.page,function(dataSet){
 			var bounds = new google.maps.LatLngBounds();
 			for (var i=0; i<dataSet.data.length; i++) {
-				createMarker(dataSet.data[i]);
-				mapBounds.extend(new google.maps.LatLng(dataSet.data[i].pos.lat,dataSet.data[i].pos.lng));
+				if (createMarker(dataSet.data[i]))
+				 mapBounds.extend(new google.maps.LatLng(dataSet.data[i].pos.lat,dataSet.data[i].pos.lng));
+				else {
+				//	console.log(dataSet.data[i].postcode);
+				}
 			};
 			if (dataSet.page===-1) {
 				map.fitBounds(mapBounds);
@@ -87,12 +99,16 @@
   	getData('reading');
   });
 
+  $('#birmingham').on('click',function(e) {
+  	getData('birm');
+  });
+
   $('#all').on('click', function(e) {
   	getData('master');
   });
 
 	$.get('/api/trips',function(data){
-		console.log(data);
+	//	console.log(data);
 	});
 
 	$('#useMarkCluster').on('click',function(e) {

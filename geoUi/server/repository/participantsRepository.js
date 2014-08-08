@@ -8,11 +8,28 @@
 
 	participantsRepository.PageSize=100;
 
+	participantsRepository.getAreaLike=function(area,page,next) {
+		client.participants().find({county:{$regex:area,$options:'i'}},
+			{postcode:1,_id:0,pos:1},
+			function(err,cursor){
+				cursor.sort({postcode:1}).skip(page*participantsRepository.PageSize).limit(participantsRepository.PageSize).toArray(next);
+			}
+		);
+	};
+
 	participantsRepository.getArea = function(area,page,next) {
-		client.participants().find({tag:area},{postcode:1,_id:0,pos:1},function(err,cursor) {
-			cursor.sort({postcode:1}).skip(page*100).batchSize(100).toArray(next);
-		});
-	}
+		var query;
+		if (area==='birm')
+			query={county:{$regex:area,$options:'i'},pos:{$ne:null}};
+		else
+			query={tag:area,pos:{$ne:null}};
+		client.participants().find(query,
+			{postcode:1,_id:0,pos:1},
+			function(err,cursor) {
+				cursor.sort({postcode:1}).skip(page*participantsRepository.PageSize).limit(participantsRepository.PageSize).toArray(next);
+			}
+		);
+	};
 
 	participantsRepository.setLocation = function(dataSet,tag) {
 		for (var i=0; i<dataSet.length; i++) {
