@@ -36,7 +36,7 @@ angular.module('geoUiApp')
   $scope.activeArea ={};
   $scope.showParticipants=function(id) {
     $scope.activeArea=id;
-    $http.get('/api/participants/in/'+id).success(function(dataSet) {
+    $http.get('/api/participants/in/'+id+'/0').success(function(dataSet) {
       
       plotLocations(dataSet.data);
     })

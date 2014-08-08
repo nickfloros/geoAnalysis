@@ -92,7 +92,7 @@ return false;
 		getData('london');
   });
   $('#north').on('click', function(e) {
-		getData('liverpool_manchester');
+		getData('liverpool|manchester');
   });
 
   $('#reading').on('click', function(e) {

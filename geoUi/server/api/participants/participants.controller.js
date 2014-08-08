@@ -13,7 +13,7 @@ var nokiaFactory = require('../../repository/nokiaFactory.js');
 exports.getArea = function(req, res) {
 	var area = req.params.area;
 	var page = req.params.page===undefined?0:Math.round(parseInt(req.params.page));
-
+	console.log('area : '+area+' page : '+page);
 	console.log(area);
 	repository.getArea(req.params.area,page,function(err, dataSet) {
 		console.log(dataSet.length);
