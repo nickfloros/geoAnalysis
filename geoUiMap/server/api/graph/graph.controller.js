@@ -4,7 +4,6 @@
 
 'use strict';
 
-var _ = require('lodash');
 var graph = require('../../repository/graphRepository');
 
 // Get list of categories

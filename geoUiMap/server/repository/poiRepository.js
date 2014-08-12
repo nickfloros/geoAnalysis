@@ -16,13 +16,11 @@
  	};
 
  	poiRepository.getList = function(list,next) {
- 		console.log(list);
- 		client.pois().find({aa_id:{$in:list}}, {_id:0}).toArray(next);
- 	}
+ 		client.pois().find({aa_id:{$in:list}},{'aa_id':1,'aa_category_id':1,'loc':1,'_id':0,'name':1}).toArray(next);
+ 	};
 
  	poiRepository.getLocsList = function(list,next) {
- 		console.log(list);
- 		client.pois().find({aa_id:{$in:list}}, {'loc':1,'_id':0}).toArray(next);
+ 		client.pois().find({aa_id:{$in:list}}, {'aa_id':1,'loc':1,'_id':0}).toArray(next);
  	};
 
  	/* 

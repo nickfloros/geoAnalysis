@@ -28,4 +28,11 @@
 				.limit(frequencyRepository.pageSize)
 				.toArray(next);
 	};
+
+	frequencyRepository.page = function(page, setLength) {
+		if (setLength==0 || setLength<frequencyRepository.pageSize)
+			return -1;
+		return page+1;
+	};
+
 })(module.exports);

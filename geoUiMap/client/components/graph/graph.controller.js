@@ -11,15 +11,14 @@ angular.module('geoUiMapApp')
 		packageNames: [],
   	matrix: [] // B doesn't depend on A or Main
 	};
-	$scope.max=0;
-	$scope.dynamic=0;
+	$scope.max=117;
 
 	$scope.chart = d3.chart.dependencyWheel()
 		   .width(900)    // also used for height, since the wheel is in a a square
 	  	 .margin(150)   // used to display package names
 	  	 .padding(.02); // separating groups in the wheel
 
-
+	 $scope.dynamic=0;
 	var getName = function(code) {
 		var t = code.address.text.split(',')
 		return t[0]+' '+t[1];
@@ -43,8 +42,8 @@ angular.module('geoUiMapApp')
 
 	$scope.$on('plot.graph', function() {
 		d3.select('#chart_placeholder')
-   .datum($scope.data)
-   .call($scope.chart);
+		   .datum($scope.data)
+		   .call($scope.chart);
 
 	});
 

@@ -1,3 +1,4 @@
+/*jslint indent: 2*/
 'use strict';
 
 var _ = require('lodash');
@@ -23,4 +24,4 @@ exports.getId=function(req,res) {
 		};
 		res.json(payload);
 	});
-}
+};

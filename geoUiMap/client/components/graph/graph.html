@@ -2,10 +2,12 @@
 <div id="myGraph" ng-controller="GraphCtrl" style="padding:20px">
 <div class="row">
 <a ng-click="showGraph()" href="">Show Graph</a>
-	<progressbar max="max" value="dynamic">
+	<progressbar max="max" value="dynamic" style="width:100px">
 		<span style="color:black; white-space:nowrap;">{{dynamic}} / {{max}}</span>
 	</progressbar>
-</div style="padding:20px">
-	<div id="chart_placeholder"></div>
-	<div id="visualization"></div>
+</div>
+	<div style="padding:20px">
+		<div id="chart_placeholder"></div>
+		<div id="visualization"></div>
+	</div>
 </div>

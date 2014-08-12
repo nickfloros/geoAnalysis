@@ -54,21 +54,19 @@ exports.getStartEnds=function(req,res) {
 
 exports.getTripPois=function(req,res) {
 	var tripId=req.params['id'];
-	console.log('searching : '+tripId);
+	console.log('getTripPois -> searching : '+tripId);
 	trip.getStartEndPois(Math.round(tripId),function(err, dataSet) {
 		var payload = {
 			success : true,
 			data : []
 		};
+		// need to get unique entries ...
 		async.eachSeries([dataSet[0].start.pois,dataSet[0].end.pois],
 			function(data, cb) {
 				var list=[];
-				for (var i=1; i<data.length; i++) {
-					list.push(Math.round(data[i].aa_id));
-				}
+				_.forEach(data,function(item) {list.push(Math.round(item.aa_id));});
 				poi.getLocsList(list,function(err, dataSet) {
-					for (var i=0; i<dataSet.length; i++)
-						payload.data.push(dataSet[i]);
+					_.forEach(dataSet,function(item) {payload.data.push(item);});
 					cb();
 				});
 			},
