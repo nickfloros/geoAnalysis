@@ -1,0 +1,11 @@
+<!-- graph html -->
+<div id="freqGraph" ng-controller="FreqGraphCtrl" style="padding:20px">
+<div class="row">
+<a ng-click="showGraph()" href="">Show Graph</a>
+	<progressbar max="max" value="dynamic">
+		<span style="color:black; white-space:nowrap;">{{dynamic}} / {{max}}</span>
+	</progressbar>
+</div style="padding:20px">
+	<div id="freq_chart_placeholder"></div>
+	<div id="freq_visualization"></div>
+</div>
