@@ -10,7 +10,7 @@
 
 	participantsRepository.getAreaLike=function(area,page,next) {
 		client.participants().find({county:{$regex:area,$options:'i'}},
-			{postcode:1,_id:1,pos:1},
+			{postcode:1,_id:1,pos:1,email:1},
 			function(err,cursor){
 				cursor.sort({postcode:1}).skip(page*participantsRepository.PageSize).limit(participantsRepository.PageSize).toArray(next);
 			}
@@ -24,7 +24,7 @@
 		else
 			query={county:{$regex:area,$options:'i'}};
 		client.participants().find(query,
-			{postcode:1,_id:1,pos:1},
+			{postcode:1,_id:1,pos:1,email:1},
 			function(err,cursor) {
 				cursor.sort({postcode:1}).skip(page*participantsRepository.PageSize).limit(participantsRepository.PageSize).toArray(next);
 			}
